@@ -1,0 +1,125 @@
+---
+title: "Actividad 2 Metodos y Simulación Estadistica-Problema 2"
+author: "Javier_Caicedo"
+date: "2023-03-06"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Problema 1-Teorema del Límite Central
+
+El Teorema del Límite Central es uno de los más importantes en la inferencia estadística y habla sobre la convergencia de los estimadores como la proporción muestral a la distribución normal. Algunos autores afirman que esta aproximación es bastante buena a partir del umbral n>30.
+
+A continuación se describen los siguientes pasos para su verificación:
+
+a) Realice una simulación en la cual genere una población de N=1000 (Lote), donde el porcentaje de individuos (supongamos plantas) enfermas sea del 50%.
+
+```{r, echo=FALSE}
+prop.test(500,1000)$conf.int
+
+```
+**De acuerdo al resultado anterior, se puede afirmar con una confianza del 95%, que entre el 46% y el 53% de las plantas tienen alguna enfermedad**
+
+b) Genere una función que permita: Obtener una muestra aleatoria de la población y Calcule el estimador de la proporción muestral pˆ para un tamaño de muestra dado n.
+
+```{r, echo=FALSE}
+x=rnorm(500,1000,0.5)
+plot(density(x), main="Muestra Aleatoria ", las=1, xlab = "# Plantas ", ylab="%", col=2, lwd=4)
+```
+
+
+c) Repita el escenario anterior (b) n=500 veces y analice los resultados en cuanto al comportamiento de los 500 resultados del estimador pˆ, ¿Qué tan simétricos o sesgados son los resultados obtenidos? y ¿qué se puede observar en cuanto a la variabilidad?. Realice en su informe un comentario sobre los resultados obtenidos.
+
+```{r, echo=FALSE}
+n=500
+x1=sample(c("Enferma","Sana"),n,replace=TRUE)
+p1=prop.table(table(x1))
+barplot(p1, las=1, main="Muestra Aleatoria n=500 ")
+
+```
+
+
+d) Repita los puntos b y c para tamaños de muestra n=5, 10, 15, 20, 30, 50, 60, 100, 200, 500. Compare los resultados obtenidos para los diferentes tamaños de muestra en cuanto a la normalidad. Utilice pruebas de bondad y ajuste (shapiro wilks :shspiro.test()) y métodos gráficos (grafico de normalidad: qqnorm()). Comente ensu informe los resultados obtenidos.
+
+```{r, echo=FALSE}
+par(mfrow=c(2, 3))
+n=5
+x1=sample(c("Enferma","Sana"),n,replace=TRUE)
+p1=prop.table(table(x1))
+barplot(p1, las=1,col=c("red","green"),ylim=c(0,0.8),main="n=5")
+
+n=10
+x1=sample(c("Enferma","Sana"),n,replace=TRUE)
+p1=prop.table(table(x1))
+barplot(p1, las=1,col=c("red","green"),ylim=c(0,0.8),main="n=10")
+
+n=15
+x1=sample(c("Enferma","Sana"),n,replace=TRUE)
+p1=prop.table(table(x1))
+barplot(p1, las=1,col=c("red","green"),ylim=c(0,0.8),main="n=15")
+
+n=20
+x1=sample(c("Enferma","Sana"),n,replace=TRUE)
+p1=prop.table(table(x1))
+barplot(p1, las=1,col=c("red","green"),ylim=c(0,0.8),main="n=20")
+
+n=30
+x1=sample(c("Enferma","Sana"),n,replace=TRUE)
+p1=prop.table(table(x1))
+barplot(p1, las=1,col=c("red","green"),ylim=c(0,0.8),main="n=30")
+
+n=50
+x1=sample(c("Enferma","Sana"),n,replace=TRUE)
+p1=prop.table(table(x1))
+barplot(p1, las=1,col=c("red","green"),ylim=c(0,0.8),main="n=50")
+
+n=60
+x1=sample(c("Enferma","Sana"),n,replace=TRUE)
+p1=prop.table(table(x1))
+barplot(p1, las=1,col=c("red","green"),ylim=c(0,0.8),main="n=60")
+
+n=100
+x1=sample(c("Enferma","Sana"),n,replace=TRUE)
+p1=prop.table(table(x1))
+barplot(p1, las=1,col=c("red","green"),ylim=c(0,0.8),main="n=100")
+
+n=200
+x1=sample(c("Enferma","Sana"),n,replace=TRUE)
+p1=prop.table(table(x1))
+barplot(p1, las=1,col=c("red","green"),ylim=c(0,0.8),main="n=200")
+
+n=500
+x1=sample(c("Enferma","Sana"),n,replace=TRUE)
+p1=prop.table(table(x1))
+barplot(p1, las=1,col=c("red","green"),ylim=c(0,0.8),main="n=500")
+              
+        
+```
+
+
+e) Repita toda la simulación (puntos a – d), pero ahora para lotes con 10% de plantas enfermas y de nuevo para lotes con un 90% de plantas enfermas. Concluya sobre los resultados del ejercicio.
+
+
+```{r, echo=FALSE}
+
+x=rnorm(500,1000,0.1)
+plot(density(x), main="Lotes con 10% de plantas Enfermas ", las=1, xlab = "# Plantas ", ylab="%", col=2, lwd=4)
+
+prop.test(100,1000)$conf.int
+
+
+```
+**De acuerdo al resultado anterior, se puede afirmar con una confianza del 95%, si tenemos un lote con el 10% de plantas enfermas, entre el 8% y el 12% de las plantas presentan alguna enfermedad**
+
+```{r, echo=FALSE}
+x=rnorm(500,1000,0.9)
+plot(density(x), main="Lotes con 90% de plantas Enfermas ", las=1, xlab = "# Plantas ", ylab="%", col=2, lwd=4)
+
+prop.test(900,1000)$conf.int
+```
+**De acuerdo al resultado anterior, se puede afirmar con una confianza del 95%, si tenemos un lote con el 90% de plantas enfermas, entre el 87% y el 91% de las plantas presentan alguna enfermedad**
+
+

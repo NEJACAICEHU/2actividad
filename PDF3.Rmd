@@ -1,0 +1,14 @@
+---
+title: "PDF3"
+author: "Javier_Caicedo"
+date: "2023-03-06"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Uso del valor-p como criterio de decisión
+
+

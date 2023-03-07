@@ -1,0 +1,53 @@
+---
+title: "Actividad 2 Metodos y Simulación Estadistica-Problema 2"
+author: "Javier_Caicedo"
+date: "2023-03-06"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## PROBLEMA 2 VALIDACION DE RESULTADOS
+
+La comparación de tratamientos es una práctica fundamental en las ciencias agropecuarias y para ello a nivel estadístico se cuenta con herramientas para apoyar el proceso de toma de decisiones y así poder lograr concluir con un alto grado de confianza sobre los resultados observados en una muestra. A través de la simulación es posible evaluar estimadores y sus propiedades, que nos permitan usarlos con toda tranquilidad.
+
+Suponga un escenario en el cual se aplicó tratamientos diferentes a dos lotes de una misma plantas y se desea analizar si alguno de los dos tratamientos presenta un mejor desempeño en el control de una plaga presente en ambos al momento inicial. Para ello utilizará como criterio de desempeño el tratamiento, el menor porcentaje de plantas enfermas presente después de un tiempo de aplicación (es decir, si se presentan o no diferencias en las proporciones de enfermos p1 y p2 - proporciones poblacionales-).
+
+a) Realice una simulación en la cual genere dos poblaciones de N1=1000 (Lote 1) y N2=1500 (Lote 2), para los cuales se asume que el porcentaje de individuos (plantas) enfermas en ambos lotes es del 10% (es decir, sin diferencias entre los tratamientos).
+
+```{r}
+
+```
+
+
+b) Genere una función que permita obtener una muestra aleatoria de los lotes y calcule el estimador de la proporción muestral para cada lote (p1ˆ y p2ˆ) para un tamaño de muestra dado n1=n2. Calcule la diferencia entre los estimadores (p1ˆMENOS p2ˆ).
+
+```{r}
+
+```
+
+c) Repita el escenario anterior (b) 500 veces y analice los resultados en cuanto al comportamiento de los 500 estimadores (diferencias p1ˆ MENOS p2ˆ). ¿Qué tan simétricos son los resultados?, ¿Son siempre cero las diferencias?
+
+```{r}
+
+```
+
+
+d) Realice los puntos b y c para tamaños de muestra n1=n2=5, 10
+, 15, 20, 30, 50, 60, 100, 200, 500. Compare los resultados de los estimadores (p1ˆMENOS p2ˆ) en cuanto a la normalidad. También analice el comportamiento de las diferencias y evalúe. ¿Considera que es más probable concluir que existen diferencias entre los tratamientos con muestras grandes que pequeñas, es decir, cuál considera usted que es el efecto del tamaño de muestra en el caso de la comparación de proporciones?
+
+```{r}
+
+```
+
+
+e) Ahora realice nuevamente los puntos a MENOS d bajo un escenario con dos lotes, pero de proporciones de enfermos diferentes (p1=0.1 y p2=0.15), es decir, el tratamiento del lote 1 si presentó un mejor desempeño reduciendo en un 5% el porcentaje de enfermos. Bajo este nuevo escenario compare la distribución de estas diferencias (p1ˆMENOS p2ˆ) con las observadas bajo igualdad de condiciones en los lotes. ¿Qué puede concluir? ¿Existen puntos en los cuales es posible que se observen diferencias de p1 MENOS p2 bajo ambos escenarios (escenario 1: sin diferencias entre p1 y p2, escenario 2: diferencia de 5%)?
+
+
+```{r}
+
+```
+
+
