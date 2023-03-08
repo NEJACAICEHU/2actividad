@@ -17,36 +17,120 @@ Suponga un escenario en el cual se aplicó tratamientos diferentes a dos lotes d
 
 a) Realice una simulación en la cual genere dos poblaciones de N1=1000 (Lote 1) y N2=1500 (Lote 2), para los cuales se asume que el porcentaje de individuos (plantas) enfermas en ambos lotes es del 10% (es decir, sin diferencias entre los tratamientos).
 
-```{r}
+```{r, echo=FALSE}
+prop.test(100,1000)$conf.int
 
 ```
+**Para una población de 1000 plantas y asumiendo que el porcentaje de plantas enfermas es del 10%, se puede afirmar con una confianza del 95%, que entre el 8.24% y el 12.06% de las plantas tienen alguna enfermedad**
 
+```{r, echo=FALSE}
+prop.test(150,1500)$conf.int
+```
+
+**Para una población de 1500 plantas y asumiendo que el porcentaje de plantas enfermas es del 10%, se puede afirmar con una confianza del 95%, que entre el 8.55% y el 11.65% de las plantas tienen alguna enfermedad**
 
 b) Genere una función que permita obtener una muestra aleatoria de los lotes y calcule el estimador de la proporción muestral para cada lote (p1ˆ y p2ˆ) para un tamaño de muestra dado n1=n2. Calcule la diferencia entre los estimadores (p1ˆMENOS p2ˆ).
 
-```{r}
+```{r, echo=FALSE}
+n=1000
+x1=sample(c(1,0),n,replace=TRUE)
+x2=sample(c(1,0),n,replace=TRUE)
+t.test(x1, x2, paired = TRUE, conf.level =0.95)$conf.int
+
 
 ```
 
+
 c) Repita el escenario anterior (b) 500 veces y analice los resultados en cuanto al comportamiento de los 500 estimadores (diferencias p1ˆ MENOS p2ˆ). ¿Qué tan simétricos son los resultados?, ¿Son siempre cero las diferencias?
 
-```{r}
+```{r, echo=FALSE}
+library(ggplot2)
+n=1000                                  
+m=500*n                                  
+Y=matrix(runif(m, min=0, max=150), ncol=n) 
+Mx=apply(Y,1,mean)                        
+Max=apply(Y,1,max)                        
+T1=2*Mx                                   
+T2=Max                                    
+T3=((n+1)/n)*T2                           
+T123=data.frame(T1,T2,T3)                 
 
+boxplot(T123, las=1, main="Comparación estimadores con n=1000")  
 ```
 
 
 d) Realice los puntos b y c para tamaños de muestra n1=n2=5, 10
 , 15, 20, 30, 50, 60, 100, 200, 500. Compare los resultados de los estimadores (p1ˆMENOS p2ˆ) en cuanto a la normalidad. También analice el comportamiento de las diferencias y evalúe. ¿Considera que es más probable concluir que existen diferencias entre los tratamientos con muestras grandes que pequeñas, es decir, cuál considera usted que es el efecto del tamaño de muestra en el caso de la comparación de proporciones?
 
-```{r}
+```{r, echo=FALSE}
+n1=5
+n2=5
+d1=sample(0:1,n1, replace = TRUE)   
+d2=sample(0:1,n2, replace = TRUE) 
+prop.test(c(d1[2], d2[2]),c(sum(d1), sum(d2)) )
 
+n1=15
+n2=15
+d1=sample(0:1,n1, replace = TRUE)   
+d2=sample(0:1,n2, replace = TRUE) 
+prop.test(c(d1[2], d2[2]),c(sum(d1), sum(d2)) )
+
+n1=20
+n2=20
+d1=sample(0:1,n1, replace = TRUE)   
+d2=sample(0:1,n2, replace = TRUE) 
+prop.test(c(d1[2], d2[2]),c(sum(d1), sum(d2)) )
+
+n1=30
+n2=30
+d1=sample(0:1,n1, replace = TRUE)   
+d2=sample(0:1,n2, replace = TRUE) 
+prop.test(c(d1[2], d2[2]),c(sum(d1), sum(d2)) )
+
+n1=50
+n2=50
+d1=sample(0:1,n1, replace = TRUE)   
+d2=sample(0:1,n2, replace = TRUE) 
+prop.test(c(d1[2], d2[2]),c(sum(d1), sum(d2)) )
+
+n1=60
+n2=60
+d1=sample(0:1,n1, replace = TRUE)   
+d2=sample(0:1,n2, replace = TRUE) 
+prop.test(c(d1[2], d2[2]),c(sum(d1), sum(d2)) )
+
+n1=100
+n2=100
+d1=sample(0:1,n1, replace = TRUE)   
+d2=sample(0:1,n2, replace = TRUE) 
+prop.test(c(d1[2], d2[2]),c(sum(d1), sum(d2)) )
+
+n1=200
+n2=200
+d1=sample(0:1,n1, replace = TRUE)   
+d2=sample(0:1,n2, replace = TRUE) 
+prop.test(c(d1[2], d2[2]),c(sum(d1), sum(d2)) )
+
+n1=500
+n2=500
+d1=sample(0:1,n1, replace = TRUE)   
+d2=sample(0:1,n2, replace = TRUE) 
+prop.test(c(d1[2], d2[2]),c(sum(d1), sum(d2)) )
 ```
 
 
 e) Ahora realice nuevamente los puntos a MENOS d bajo un escenario con dos lotes, pero de proporciones de enfermos diferentes (p1=0.1 y p2=0.15), es decir, el tratamiento del lote 1 si presentó un mejor desempeño reduciendo en un 5% el porcentaje de enfermos. Bajo este nuevo escenario compare la distribución de estas diferencias (p1ˆMENOS p2ˆ) con las observadas bajo igualdad de condiciones en los lotes. ¿Qué puede concluir? ¿Existen puntos en los cuales es posible que se observen diferencias de p1 MENOS p2 bajo ambos escenarios (escenario 1: sin diferencias entre p1 y p2, escenario 2: diferencia de 5%)?
 
 
-```{r}
+```{r, echo=FALSE}
+set.seed(123)
+planta<-rbinom(1000,1,0.1)
+table(planta)
+
+set.seed(123)
+planta<-rbinom(1000,1,0.15)
+table(planta)
+
 
 ```
 
