@@ -123,15 +123,18 @@ e) Ahora realice nuevamente los puntos a MENOS d bajo un escenario con dos lotes
 
 
 ```{r, echo=FALSE}
-set.seed(123)
-planta<-rbinom(1000,1,0.1)
-table(planta)
 
-set.seed(123)
-planta<-rbinom(1000,1,0.15)
-table(planta)
-
+Lote_Planta <- rnorm(1000, mean = 0, sd = 0.1)
+hist(Lote_Planta,freq = FALSE, main = "Proporcion de Plantas Enfermas al p1=0.1", ylab = "Densidad") 
+lines(density(Lote_Planta), lwd = 2, col = 'red')
 
 ```
 
+```{r, echo=FALSE}
+
+Lote_Planta <- rnorm(1000, mean = 0, sd = 0.15)
+hist(Lote_Planta,freq = FALSE, main = "Proporcion de Plantas Enfermas al p1=0.15", ylab = "Densidad") 
+lines(density(Lote_Planta), lwd = 2, col = 'blue')
+
+```
 
